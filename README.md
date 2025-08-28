@@ -1,2 +1,2 @@
-# EUPHO-BORDE
-EUPHO BORDE
+# EUPHO
+euphorbia davidii
