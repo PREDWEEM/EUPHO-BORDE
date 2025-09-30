@@ -134,7 +134,24 @@ st.success(f"Horizonte detectado: {dfh['Fecha'].min().date()} → {dfh['Fecha'].
 
 # ======== Predicción ========
 modelo = get_model()
+
+# ======== Predicción ========
+modelo = get_model()
+
+# --- Datos crudos como matriz ---
 X = dfh[["Julian_days","TMAX","TMIN","Prec"]].to_numpy(float)
+
+# --- Mostramos los datos crudos previos a la red neuronal ---
+st.subheader("📋 Datos de entrada crudos desde meteo_history.csv")
+st.dataframe(dfh[["Fecha", "Julian_days", "TMAX", "TMIN", "Prec"]], use_container_width=True)
+
+# --- Mostramos los datos ya normalizados como los ve la red neuronal ---
+Xn = modelo._normalize_input(X)
+df_input_norm = pd.DataFrame(Xn, columns=["JD_norm", "TMAX_norm", "TMIN_norm", "Prec_norm"])
+st.subheader("🔎 Datos normalizados (input a la red neuronal)")
+st.dataframe(df_input_norm, use_container_width=True)
+
+# --- Predicción usando el modelo ---
 emerrel, emeac01 = modelo.predict(X)
 
 pred = pd.DataFrame({
