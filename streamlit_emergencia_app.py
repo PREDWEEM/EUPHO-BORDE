@@ -153,6 +153,24 @@ st.dataframe(df_input_norm, use_container_width=True)
 
 # --- Predicción usando el modelo ---
 emerrel, emeac01 = modelo.predict(X)
+# === Diagnóstico: salida plana ===
+if np.allclose(emerrel, 0, atol=1e-6):
+    st.error("🚫 La salida del modelo EMERREL es todo ceros. Esto NO es normal. Verificá los datos de entrada.")
+elif np.all(emerrel < 1e-4):
+    st.warning("⚠️ Las salidas de EMERREL son muy cercanas a cero. Posible entrada fuera de rango.")
+
+# === Diagnóstico: rango de entrada crudo ===
+st.subheader("📊 Rango de datos de entrada (sin normalizar)")
+input_stats = dfh[["Julian_days", "TMAX", "TMIN", "Prec"]].describe()
+st.dataframe(input_stats)
+
+st.markdown("**🎯 Rangos esperados por la red neuronal para que la normalización funcione bien:**")
+st.code("""
+Julian_days: 1 → 148
+TMAX       : 7.7 → 38.5
+TMIN       : -3.5 → 23.5
+Prec       : 0.0 → 59.9
+""")
 
 pred = pd.DataFrame({
     "Fecha": dfh["Fecha"].to_numpy(),
