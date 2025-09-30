@@ -44,7 +44,7 @@ class PracticalANNModel:
         ], dtype=float)
         self.bias_out = -5.394722
         # Rango de normalización de entrada [min, max] para [JD, TMAX, TMIN, Prec]
-        self.input_min = np.array([1.0, 7.7, -4.0, 0.0], dtype=float)
+        self.input_min = np.array([1.0, 7.7, -3.5, 0.0], dtype=float)
         self.input_max = np.array([148.0, 38.5, 23.5, 59.9], dtype=float)
 
     def _tansig(self, x):
