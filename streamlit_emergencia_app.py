@@ -11,7 +11,7 @@ import plotly.graph_objects as go
 
 # ------------------ CONFIGURACIÓN ------------------
 st.set_page_config(page_title="PREDWEEM · Solo con meteo_history.csv", layout="wide")
-st.title("🌱 PREDWEEM — EUPHORBIA DAVIDII · Bahía Blanca 2025")
+st.title("🌱 PREDWEEM — EUPHORBIA DAVIDII · BORDENAVE 2025")
 st.caption("Usa únicamente las filas existentes del CSV (sin completar ni reindexar).")
 
 CSV_PATH = Path("meteo_history.csv")
